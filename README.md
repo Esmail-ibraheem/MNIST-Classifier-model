@@ -2,6 +2,9 @@
 applying Convolutional Neural Network with MNIST data to classify the digits using pytorch library. 
 ### Accuracy: 97% 
 ---
+![visualize](https://github.com/Esmail-ibraheem/MNIST-Classifier/assets/113830751/c9a1de97-93e8-437a-8b92-a81666219547)
+
+---
 ### Download the MNIST data: 
 https://github.com/Esmail-ibraheem/MNIST-data
 
