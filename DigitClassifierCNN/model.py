@@ -5,12 +5,28 @@ from torch.utils.data import DataLoader
 import torch
 import torch.nn as nn 
 import torch.optim as optim 
+import matplotlib.pyplot as plt
 
-training_data = datasets.MNIST(root = "data", train = True, transform= ToTensor, download=True)
-testing_data = datasets.MNIST(root = "data", train = True, transform= ToTensor, download=True)
+training_data = datasets.MNIST(root = "data", 
+                               train = True, 
+                               transform= ToTensor, 
+                               download=True)
 
-loaders = {'train': DataLoader(training_data, batch_size=100, shuffle= True, num_workers=1), 
-           'test': DataLoader(training_data, batch_size=100, shuffle= True, num_workers=1),}
+testing_data = datasets.MNIST(root = "data", 
+                              train = True, 
+                              transform= ToTensor, 
+                              download=True)
+
+loaders = {'train': DataLoader(training_data, 
+                               batch_size=100, 
+                               shuffle= True, 
+                               num_workers=1),
+
+           'test': DataLoader(training_data, 
+                              batch_size=100, 
+                              shuffle= True, 
+                              num_workers=1),}
+
 
 class Convultional_Neural_Network(nn.Module):
     def __init__(self):
@@ -20,6 +36,7 @@ class Convultional_Neural_Network(nn.Module):
         self.conv_dropout = nn.Dropout2d()
         self.fully_connected_layer = nn.Linear(320, 50)
         self.fully_connected_layer2 = nn.Linear(50, 10)
+
     def forward(self, x):
         x = nn.functional.relu(nn.functional.max_pool2d(self.conv1(x), 2))
         x = nn.functional.relu(nn.functional.max_pool2d(self.conv_dropout(self.conv2(x)), 2))
@@ -43,7 +60,8 @@ def train(epoch):
         loss = loss_function(output, target)
         loss.backward()
         optimizer.step()
-
+        if batch%20==0:
+            print(f'Train Epoch: {epoch} [{batch * len(data)}/ {len(loaders["train"].dataset)} ({100. * batch / len(loaders["train"]):.0f} %)]\t{loss.item():.6}')
 
 def test():
     model.eval()
@@ -66,7 +84,7 @@ for epoch in range(1,11):
     test()
 
 
-import matplotlib.pyplot as plt
+
 
 model.eval()
 
