@@ -7,6 +7,7 @@ import torch.nn as nn
 import torch.optim as optim 
 import matplotlib.pyplot as plt
 
+# download mnist data
 training_data = datasets.MNIST(root = "data", 
                                train = True, 
                                transform= ToTensor, 
@@ -27,7 +28,7 @@ loaders = {'train': DataLoader(training_data,
                               shuffle= True, 
                               num_workers=1),}
 
-
+# creating the CNN architecture.
 class Convultional_Neural_Network(nn.Module):
     def __init__(self):
         super(Convultional_Neural_Network, self).__init__()
@@ -51,6 +52,7 @@ model = Convultional_Neural_Network().to(device)
 optimizer = optim.Adam(model.parameters(), lr = 0.001)
 loss_function = nn.CrossEntropyLoss()
 
+# training algorithm after using Adam algorithm.
 def train(epoch):
     model.train()
     for batch, (data, target) in enumerate(loaders['train']):
@@ -85,7 +87,7 @@ for epoch in range(1,11):
 
 
 
-
+# show the images of the mnist datasets.
 model.eval()
 
 for i in range(len(testing_data)):
