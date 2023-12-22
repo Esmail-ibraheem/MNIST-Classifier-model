@@ -3,7 +3,7 @@ applying Convolutional Neural Network with MNIST data to classify the digits usi
 ### Accuracy: 97% 
 ---
 ```
-class Convultional_Neural_Network(nn.Module):
+class Convolutional_Neural_Network(nn.Module):
     def __init__(self):
         super(Convultional_Neural_Network, self).__init__()
         self.conv1 = nn.Conv2d(1, 10, kernel_size=5)
