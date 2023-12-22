@@ -2,6 +2,25 @@
 applying Convolutional Neural Network with MNIST data to classify the digits using pytorch library. 
 ### Accuracy: 97% 
 ---
+'''
+class Convultional_Neural_Network(nn.Module):
+    def __init__(self):
+        super(Convultional_Neural_Network, self).__init__()
+        self.conv1 = nn.Conv2d(1, 10, kernel_size=5)
+        self.conv2 = nn.Conv2d(10, 20, kernel_size=5)
+        self.conv_dropout = nn.Dropout2d()
+        self.fully_connected_layer = nn.Linear(320, 50)
+        self.fully_connected_layer2 = nn.Linear(50, 10)
+
+    def forward(self, x):
+        x = nn.functional.relu(nn.functional.max_pool2d(self.conv1(x), 2))
+        x = nn.functional.relu(nn.functional.max_pool2d(self.conv_dropout(self.conv2(x)), 2))
+        x = x.view(-1, 320)
+        x = nn.functional.relu(self.fully_connected_layer(x))
+        x = nn.functional.dropout(x , training= self.training)
+        x = self.fully_connected_layer2(x) 
+        return nn.functional.softmax(x)
+'''
 ![visualize](https://github.com/Esmail-ibraheem/MNIST-Classifier/assets/113830751/c9a1de97-93e8-437a-8b92-a81666219547)
 
 ---
