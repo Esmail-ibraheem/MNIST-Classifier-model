@@ -2,7 +2,7 @@
 applying Convolutional Neural Network with MNIST data to classify the digits using pytorch library. 
 ### Accuracy: 97% 
 ---
-```
+```python
 class Convolutional_Neural_Network(nn.Module):
     def __init__(self):
         super(Convultional_Neural_Network, self).__init__()
